@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { createElement } from "react";
 
-const outputPath = (env: "server" | "client"): string => (__DEVELOPMENT__ ? path.resolve(process.cwd(), "dev", env) : path.resolve(process.cwd(), "dist", env));
+const outputPath = (env: "server" | "client"): string => (path.resolve(process.cwd(), "build", env));
 
 const manifestFile = (): string => (__DEVELOPMENT__ ? "manifest-dev.json" : "manifest-prod.json");
 

@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Outlet } from "react-router";
 
 import { Header } from "./Header";
-import style from "./index.module.scss";
+import style from "./index.module.less";
 
 import type { PreLoadComponentType } from "types/components";
 

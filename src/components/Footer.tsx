@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import { allRoutes } from "router/routes";
 
-import style from "./index.module.scss";
+import style from "./index.module.less";
 
 export const Footer = () => {
   const navigate = useNavigate();

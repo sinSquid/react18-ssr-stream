@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { useEffectOnce } from "hooks/useEffectOnce";
 import { useMounted } from "hooks/useMounted";
 
-import style from "./index.module.scss";
+import style from "./index.module.less";
 
 let div: HTMLDivElement | undefined;
 

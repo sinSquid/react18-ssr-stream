@@ -37,8 +37,8 @@ const withHydrate = async () => {
   }
 
   const script = nodemon({
-    script: path.resolve(process.cwd(), "dev", `server/app.js`),
-    watch: path.resolve(process.cwd(), "dev", "server"),
+    script: path.resolve(process.cwd(), "build", `server/app.js`),
+    watch: path.resolve(process.cwd(), "build", "server"),
     delay: 1000,
   });
 
@@ -74,7 +74,7 @@ const withMiddleWare = async () => {
     console.log(chalk.red(e.toString()));
   }
 
-  const svrCodeWatchProcess = spawn("node", ["./dev/server/app.js"], {
+  const svrCodeWatchProcess = spawn("node", ["./build/server/app.js"], {
     stdio: "inherit",
     shell: true,
   });

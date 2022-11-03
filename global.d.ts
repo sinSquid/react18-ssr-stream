@@ -86,12 +86,12 @@ declare global {
     export default css;
   }
 
-  module "*.module.scss" {
+  module "*.module.less" {
     const classes: { readonly [key: string]: string };
     export default classes;
   }
 
-  module "*.scss" {
+  module "*.less" {
     const classes: { readonly [key: string]: string };
     export default classes;
   }

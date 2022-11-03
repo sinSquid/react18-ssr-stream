@@ -21,7 +21,7 @@ const resolveConfig = () => {
       script: path.resolve(basePath, "script"),
       lang: path.resolve(basePath, "lang"),
     },
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".css", ".scss"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".css", ".less"],
   };
 };
 

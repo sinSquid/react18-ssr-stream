@@ -7,14 +7,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const cssRules = (env, isDev = true) => {
   // css no module
   return {
-    test: /\.s?css$/,
+    test: /\.(css|less)$/,
     use: [
       env === "client" && (isDev ? { loader: "style-loader" } : { loader: MiniCssExtractPlugin.loader }),
       { loader: "css-loader" },
       { loader: "postcss-loader" },
-      { loader: "sass-loader" },
+      { loader: "less-loader" },
     ].filter(Boolean),
-    exclude: /\.module\.s?css$/,
+    exclude: /\.module\.(css|less)$/,
   };
 };
 
@@ -78,10 +78,10 @@ const cssModuleRules = (env, isDev = true) => {
   //   poolTimeout: isDev ? Infinity : 2000,
   // };
 
-  // threadLoader.warmup(workerPoolSass, ["sass-loader", "css-loader"]);
+  // threadLoader.warmup(workerPoolSass, ["less-loader", "css-loader"]);
 
   return {
-    test: /\.module\.s?css$/,
+    test: /\.module\.(css|less)$/,
     use: [
       // 分离打包css文件
       env === "client" &&
@@ -109,8 +109,8 @@ const cssModuleRules = (env, isDev = true) => {
       },
       // 启用can i use中不同浏览器前缀支持
       { loader: "postcss-loader" },
-      // 启用sass支持
-      { loader: "sass-loader" },
+      // 启用less支持
+      { loader: "less-loader" },
     ].filter(Boolean),
     exclude: [path.resolve(process.cwd(), "node_modules")],
   };

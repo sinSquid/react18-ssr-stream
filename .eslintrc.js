@@ -19,7 +19,7 @@ module.exports = {
     "node_modules/*",
     "script/*",
     "dist/*",
-    "dev/*",
+    "build/*",
     "src/__mocks__/*",
     "webpack/*",
     "!.prettierrc",

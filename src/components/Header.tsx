@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { useLang } from "hooks/useLang";
 import { supportedLangs } from "utils/i18n";
 
-import style from "./index.module.scss";
+import style from "./index.module.less";
 
 export const Header = () => {
   const { changeLang, lang } = useLang();

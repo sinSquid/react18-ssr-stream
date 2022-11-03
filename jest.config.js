@@ -82,10 +82,10 @@ module.exports = {
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+    "^.+\\.module\\.(css|less)$": "identity-obj-proxy",
 
     // Handle CSS imports (without CSS modules)
-    "^.+\\.(css|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+    "^.+\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
 
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
@@ -177,7 +177,7 @@ module.exports = {
   transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: ["/node_modules/", "^.+\\.module\\.(css|sass|scss)$"],
+  transformIgnorePatterns: ["/node_modules/", "^.+\\.module\\.(css|less)$"],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
