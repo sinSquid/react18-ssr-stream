@@ -5,18 +5,25 @@ import { allRoutes } from "router/routes";
 
 import style from "./index.module.less";
 
+interface DemoType {
+  path?: string | undefined;
+}
+
 export const Footer = () => {
   const navigate = useNavigate();
+  const allr: DemoType[] = allRoutes[0].children || []
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        {(allRoutes[0].children || [])
+        {allr
           .filter((it) => it.path)
           .map((item) => (
             <Button
               key={item.path}
               onClick={() => {
-                item.path && navigate(item.path);
+                if (item.path) {
+                  navigate(item.path);
+                }
               }}
             >
               {item.path}

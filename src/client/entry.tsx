@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires  */
+/* eslint-disable global-require  */
 import { createRoot, hydrateRoot } from "react-dom/client";
 
 import { createUniversalStore } from "store";
@@ -17,6 +18,7 @@ const preLoadStateElement = document.querySelector("script#__preload_state__");
 
 const store = createUniversalStore({ initialState: JSON.parse(preLoadStateElement?.innerHTML || "{}") as StoreState });
 
+// eslint-disable-next-line no-underscore-dangle
 window.__ENV__ = JSON.parse(preLoadEnvElement?.innerHTML || "{}");
 
 window.__PRELOAD_STORE_STATE__ = JSON.parse(preLoadStateElement?.innerHTML || "{}");
@@ -34,12 +36,10 @@ if (__CSR__) {
   const { preLoadLang } = require("utils/preLoad");
   const root = createRoot(place);
   preLoadLang({ store, lang: window.__ENV__.LANG }).then(() => root.render(<Root store={store} />));
-} else {
-  if (!window.__ENV__.isSSR || (window.__ENV__.isDEVELOPMENT && window.__ENV__.isMIDDLEWARE)) {
+} else if (!window.__ENV__.isSSR || (window.__ENV__.isDEVELOPMENT && window.__ENV__.isMIDDLEWARE)) {
     log("not hydrate render on client", "warn");
     const root = createRoot(place);
     root.render(<Root store={store} />);
   } else {
     hydrateRoot(place, <Root store={store} />);
   }
-}

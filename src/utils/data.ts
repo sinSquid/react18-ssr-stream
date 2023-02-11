@@ -1,11 +1,12 @@
+import type { CACHEKEY } from './cache'
 import type { ApiRequestResult, AutoTransformDataType, FormChild, FormSerializeType, ResultProps } from "types/utils";
 
 const autoTransformData: AutoTransformDataType = <T, F>(data: ResultProps<T, F>) => {
   if (data.code !== undefined && data.state && data.data) {
     return (<ApiRequestResult<T>>data).data;
-  } else {
-    return <F>data;
   }
+    return <F>data;
+
 };
 
 const formSerialize: FormSerializeType = (element: HTMLFormElement) => {
@@ -44,11 +45,9 @@ const formSerialize: FormSerializeType = (element: HTMLFormElement) => {
                 }
               });
             }
-          } else {
-            if (!item.disabled && item.value) {
+          } else if (!item.disabled && item.value) {
               re[item.name] = item.value;
             }
-          }
         }
       }
     });
@@ -58,34 +57,26 @@ const formSerialize: FormSerializeType = (element: HTMLFormElement) => {
   return re;
 };
 
-const getRandom = (start: number, end?: number): number => {
-  if (end === undefined) {
-    end = start;
-    start = 0;
-  }
-  return ((Math.random() * (end - start + 1)) | 0) + start;
-};
-
-const parseToString = (obj: { [props: string]: any } | Array<any> | string | number, preString = ""): string => {
+const parseToString = (obj: CACHEKEY, preString = ""): string => {
   let re = "";
   if (typeof obj === "object") {
     if (Array.isArray(obj)) {
-      re += preString + "[\n";
+      re += `${preString  }[\n`;
       obj.forEach((item) => {
-        re += preString + parseToString(item, preString + "".padEnd(2)) + "\n";
+        re += `${preString + parseToString(item, preString + "".padEnd(2))  }\n`;
       });
-      re += preString + "]\n";
+      re += `${preString  }]\n`;
     } else {
       for (const key in obj) {
-        re += preString + "{\n";
-        re += parseToString(key, preString + "".padEnd(1)) + ":" + parseToString(obj[key], preString + "".padEnd(2)) + "\n";
-        re += preString + "}\n";
+        re += `${preString  }{\n`;
+        re += `${parseToString(key, preString + "".padEnd(1))  }:${  parseToString(obj[key], preString + "".padEnd(2))  }\n`;
+        re += `${preString  }}\n`;
       }
     }
     return re;
-  } else {
-    return preString + obj;
   }
+    return preString + obj;
+
 };
 
 interface Point {
@@ -94,7 +85,7 @@ interface Point {
 }
 
 const pinchHelper = {
-  isPointerEvent: (event: any): event is PointerEvent => self.PointerEvent && event instanceof PointerEvent,
+  isPointerEvent: (event: any): event is PointerEvent => event instanceof PointerEvent,
   getDistance: (a: Point, b?: Point): number => {
     if (!b) return 0;
     return Math.sqrt((b.clientX - a.clientX) ** 2 + (b.clientY - a.clientY) ** 2);
@@ -118,4 +109,4 @@ const pinchHelper = {
   createPoint: () => new DOMPoint(),
 };
 
-export { autoTransformData, formSerialize, getRandom, parseToString, pinchHelper };
+export { autoTransformData, formSerialize, parseToString, pinchHelper };

@@ -1,6 +1,5 @@
 import { lazy } from "react";
 
-import { Layout } from "components/Layout";
 import { AutoInjectInitialProps } from "utils/preLoad";
 
 import { dynamicRouteConfig } from "./dynamicRoutes";
@@ -8,9 +7,7 @@ import { filter } from "./tools";
 
 import type { PreLoadRouteConfig } from "types/router";
 
-const baseRouter: PreLoadRouteConfig = {
-  element: <Layout />,
-};
+const baseRouter: PreLoadRouteConfig = { children: [] };
 
 const dynamicRoutes = dynamicRouteConfig
   .map((it) => ({
@@ -35,7 +32,7 @@ const dynamicRoutes = dynamicRouteConfig
       }))
     ),
   }))
-  .map(({ path, component: Component, preLoad }) => ({ path: path, preLoad, element: <Component /> }));
+  .map(({ path, component: Component, preLoad }) => ({ path, preLoad, element: <Component /> }));
 
 baseRouter.children = filter(dynamicRoutes || []);
 

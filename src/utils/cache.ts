@@ -4,9 +4,15 @@ import { log } from "./log";
 
 const maxTimeStore = 1000 * 60 * 10;
 
+type CACHEKEY = string | { [props: string]: any } | Array<any> | number
+
+// const cacheKey: CACHEKEY = '' || {name: ''} || [] || 1
+
 class CacheData<T> {
   id: NodeJS.Timeout | undefined;
+
   time: number;
+
   constructor(readonly data: T, time: number) {
     this.time = time;
     if (__CLIENT__) {
@@ -30,7 +36,7 @@ class CacheData<T> {
   }
 }
 
-class Cache<T, K> {
+class Cache<T extends CACHEKEY, K extends CACHEKEY> {
   constructor(readonly maxTime: number = maxTimeStore, readonly store: Map<T, CacheData<K>> = new Map()) {
     if (!store.has || !store.set || !store.delete || !store.get) {
       throw new Error(`store must is a Map or List. store: ${store}`);
@@ -74,10 +80,10 @@ class Cache<T, K> {
   get = (key: T) => {
     if (this.store.has(key)) {
       return this.store.get(key)?.value;
-    } else {
+    }
       log(`not cache yet, nothing to return. key: ${key}${__CLIENT__ ? ", fetch from server" : ""}`, "warn");
       return false;
-    }
+
   };
 
   deleteRightNow = (key: T) => {
@@ -91,10 +97,10 @@ class Cache<T, K> {
       return;
     }
     tryKeys.push(key);
-    if (typeof key === "string" && !key.startsWith("http")) {
+    if (typeof key === "string" && !(key as string).startsWith("http")) {
       let newKey = key as string;
       if (!newKey.startsWith("/")) {
-        newKey = "/" + newKey;
+        newKey = `/${  newKey}`;
         if (this.store.has(newKey as any)) {
           cancel(newKey);
           this.store.delete(newKey as any);
@@ -104,7 +110,7 @@ class Cache<T, K> {
         tryKeys.push(newKey);
       }
       if (!newKey.startsWith("/api")) {
-        newKey = "/api" + newKey;
+        newKey = `/api${  newKey}`;
         if (this.store.has(newKey as any)) {
           cancel(newKey);
           this.store.delete(newKey as any);
@@ -117,9 +123,9 @@ class Cache<T, K> {
     log(`error, nothing need to delete. keys: [${tryKeys.join(", ")}]`, "error");
   };
 
-  has = (key: T) => {
-    return this.store.has(key);
-  };
+  has = (key: T) => this.store.has(key);
 }
 
 export { Cache, CacheData };
+
+export type {CACHEKEY}

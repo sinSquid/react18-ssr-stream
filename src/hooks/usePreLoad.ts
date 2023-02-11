@@ -23,7 +23,7 @@ const usePreLoad: UsePreLoadType = ({ routes, preLoad }) => {
   const [query] = useSearchParams();
   const { start, end } = useChangeLoadingWithoutRedux();
   // for pure client render, need preload data
-  const firstLoad = useRef(__CSR__ ? false : true);
+  const firstLoad = useRef(!__CSR__);
   const loadedPath = useRef<string | undefined>("");
   const loadingPath = useRef<string | null>("");
   const timer1 = useRef<NodeJS.Timeout | null>(null);

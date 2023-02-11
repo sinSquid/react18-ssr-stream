@@ -6,8 +6,7 @@ import { WrapperErrorCatch } from "./WrapperCatch";
 import { WrapperLang } from "./WrapperLang";
 import { WrapperRoute } from "./WrapperRoute";
 
-export const App = () => {
-  return (
+export const App = () => (
     <WrapperLang>
       <WrapperRoute routes={allRoutes} LoadingBar={LoadingBar}>
         <WrapperErrorCatch>
@@ -16,4 +15,3 @@ export const App = () => {
       </WrapperRoute>
     </WrapperLang>
   );
-};

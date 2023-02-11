@@ -5,6 +5,8 @@ module.exports = {
     jest: true,
   },
   extends: [
+    "airbnb",
+    "airbnb-typescript",
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -34,9 +36,10 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 2021,
     sourceType: "module",
     project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
   },
   plugins: ["react", "@typescript-eslint", "react-hooks", "prettier", "import"],
   settings: {
@@ -44,7 +47,7 @@ module.exports = {
       version: "detect",
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
+      "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx"],
     },
     "import/resolver": {
       typescript: {
@@ -63,7 +66,7 @@ module.exports = {
     "react/prop-types": "off",
 
     // No need to import React when using Next.js
-    // "react/react-in-jsx-scope": "off",
+    "react/react-in-jsx-scope": "off",
 
     // This rule is not compatible with Next.js's <Link /> components
     "jsx-a11y/anchor-is-valid": "off",
@@ -98,5 +101,25 @@ module.exports = {
         noUselessIndex: true,
       },
     ],
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        namedComponents: ["arrow-function", "function-declaration"],
+        unnamedComponents: "arrow-function",
+      },
+    ],
+    "react/display-name": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "variableLike",
+        leadingUnderscore: "allowSingleOrDouble",  // 前置下划线
+        trailingUnderscore: "allowSingleOrDouble", // 后置下划线
+        format: ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"]
+      },
+    ],
+    "@typescript-eslint/no-unused-expressions": "off",
   },
 };

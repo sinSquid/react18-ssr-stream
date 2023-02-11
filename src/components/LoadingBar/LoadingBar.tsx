@@ -8,7 +8,7 @@ import style from "./index.module.less";
 
 let div: HTMLDivElement | undefined;
 
-const _Bar = forwardRef<HTMLDivElement>(function Bar(_, ref) {
+const ForwardBar = forwardRef<HTMLDivElement>((_, ref) => {
   useEffectOnce(() => {
     if (!div) {
       div = document.createElement("div");
@@ -23,4 +23,5 @@ const _Bar = forwardRef<HTMLDivElement>(function Bar(_, ref) {
     <>{createPortal(<div ref={ref} className={style.loadingBar} style={{ height: `0px`, transform: `scale(0, 1)` }} />, div as Element)}</>
   ) : null;
 });
-export const Bar = memo(_Bar);
+export const Bar = memo(ForwardBar);
+

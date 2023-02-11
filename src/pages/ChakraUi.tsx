@@ -22,7 +22,7 @@ export default function ChakraComponent() {
       </Fade>
 
       <Menu isLazy>
-        {({ isOpen }) => (
+        {() => (
           <>
             <MenuButton isActive={isOpen} as={Button} rightIcon={<span>{1234}</span>}>
               {isOpen ? "Close" : "Open"}

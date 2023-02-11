@@ -46,5 +46,5 @@
     "incremental": true
   },
   "exclude": ["dist", "build", "lang", "script", "webpack", "node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "babel.config.js"]
 }

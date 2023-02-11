@@ -9,9 +9,7 @@ import { theme } from "theme";
 
 import type { createUniversalStore } from "store";
 
-const Root = ({ store }: { store: ReturnType<typeof createUniversalStore> }) => {
-  console.warn("you are using chakra UI component library!");
-
+function Root({ store }: { store: ReturnType<typeof createUniversalStore> }) {
   const cookieStore = createCookieStorageManager("chakra-ui-color-mode", store.getState().server.cookie.data);
 
   return (
@@ -27,6 +25,6 @@ const Root = ({ store }: { store: ReturnType<typeof createUniversalStore> }) => 
       </ChakraProvider>
     </StrictMode>
   );
-};
+}
 
 export { Root };

@@ -6,10 +6,9 @@ import style from "./index.module.less";
 
 import type { PreLoadComponentType } from "types/components";
 
-const Footer = lazy(() => import("./Footer").then(({ Footer }) => ({ default: Footer })));
+const Footer = lazy(() => import("./Footer").then(({ Footer: FooterComponent }) => ({ default: FooterComponent })));
 
-export const Layout: PreLoadComponentType = () => {
-  return (
+export const Layout: PreLoadComponentType = () => (
     <div className={style.container}>
       <Header />
       <main className={style.content}>
@@ -21,4 +20,3 @@ export const Layout: PreLoadComponentType = () => {
       </Suspense>
     </div>
   );
-};

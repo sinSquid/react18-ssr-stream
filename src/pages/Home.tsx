@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       home
       <BB />
-      <Suspense></Suspense>
+      <Suspense />
     </div>
   );
 }

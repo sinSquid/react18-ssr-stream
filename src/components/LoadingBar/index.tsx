@@ -17,7 +17,9 @@ export const LoadingBar: LoadingBarWrapperType = () => {
       setLoading(false);
     }
     return () => {
-      id && clearTimeout(id);
+      if (id) {
+        clearTimeout(id);
+      }
     };
   }, [loadingState]);
   const { ref } = useLoadingBar({ loading });
